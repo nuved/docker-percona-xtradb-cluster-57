@@ -5,10 +5,11 @@ docker swarm will create a overlay network for this stack.
 On the manager it will deploy etcd and proxysql for external access on port 3306 to the mysql cluster, on worker nodes it will deploy percona xtradb.
 
 
-## deploy on current node (for testing purpose)
+## deploy a cluster with 3 node on a server without storing persist data (for testing purpose)
 
 ```
-docker-compose up
+docker-compose up -d
+docker-compose scale percona-xtradb-cluster=3
 ```
 
 ## deploy in swarm mode (from manager node)
