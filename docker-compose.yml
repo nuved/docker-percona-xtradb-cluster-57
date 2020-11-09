@@ -59,10 +59,9 @@ services:
     networks:
       - galera
     env_file: galera.env
-    volumes:
-      - /var/lib/mysql-percona-cluster:/var/lib/mysql
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
       labels: [APP=pxc]
      # service restart policy
       restart_policy:
@@ -79,7 +78,8 @@ services:
         max_failure_ratio: 0.3
       # placement constraint - in this case on 'worker' nodes only
       placement:
-        constraints: [node.role == worker]
+        constraints: [node.role == manager]
+
 
 networks:
   outside:
